@@ -29,6 +29,10 @@ class Settingslogic < Hash
       @namespace ||= value
     end
 
+    def section(value = nil)
+      @section ||= value 
+    end
+
     def suppress_errors(value = nil)
       @suppress_errors ||= value
     end
@@ -91,7 +95,7 @@ class Settingslogic < Hash
   # Basically if you pass a symbol it will look for that file in the configs directory of your rails app,
   # if you are using this in rails. If you pass a string it should be an absolute path to your settings file.
   # Then you can pass a hash, and it just allows you to access the hash via methods.
-  def initialize(hash_or_file = self.class.source, section = nil)
+  def initialize(hash_or_file = self.class.source, section = self.class.section)
     #puts "new! #{hash_or_file}"
     case hash_or_file
     when nil
@@ -106,7 +110,7 @@ class Settingslogic < Hash
       end
       self.replace hash
     end
-    @section = section || self.class.source  # so end of error says "in application.yml"
+    @section = section || "Hash" # so end of error says "in application.yml"
     create_accessors!
   end
 

@@ -147,6 +147,28 @@ describe "Settingslogic" do
     settings.setting1.setting1_child.should == "saweet"
   end
 
+  it "should handle Hash as source" do
+    Settings5.setting2.should == 5
+
+    e = nil
+    begin
+      Settings5.missing
+    rescue => e
+      e.should be_kind_of Settingslogic::MissingSetting
+    end
+    e.should_not be_nil
+    e.message.should =~ /Missing setting 'missing' in Hash/
+
+    e = nil
+    begin
+      Settings6.missing
+    rescue => e
+      e.should be_kind_of Settingslogic::MissingSetting
+    end
+    e.should_not be_nil
+    e.message.should =~ /Missing setting 'missing' in settings.yml/
+  end
+
   it "should be able to get() a key with dot.notation" do
     Settings.get('setting1.setting1_child').should == "saweet"
     Settings.get('setting1.deep.another').should == "my value"
