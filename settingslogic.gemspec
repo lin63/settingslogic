@@ -2,7 +2,7 @@
 $:.push File.expand_path("../lib", __FILE__)
 
 Gem::Specification.new do |s|
-  s.name        = "settingslogic"
+  s.name        = "hetznerza-settingslogic"
   s.version     = "2.0.9"
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Ben Johnson"]
