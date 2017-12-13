@@ -212,7 +212,11 @@ describe "Settingslogic" do
     SettingsEmpty.keys.should eql([])
   end
 
-  # Put this test last or else call to .instance will load @instance,
+	it "should delegate to_ary and to_str to Hash" do
+		[ Settings, ['a'] ].flatten.should == [Settings, 'a']
+		[ Settings, ['a'] ].join.should == 'Settingsa'
+	end # Put this test last or else call to .instance will load @instance,
+
   # masking bugs.
   it "should be a hash" do
     Settings.send(:instance).should be_is_a(Hash)
@@ -225,5 +229,4 @@ describe "Settingslogic" do
       Settings.to_hash.object_id.should_not == Settings.object_id
     end
   end
-
 end
